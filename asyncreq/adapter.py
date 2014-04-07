@@ -121,7 +121,7 @@ def HTTPAdapter(_HTTPAdapter):
         r = self.build_response(request, resp)
 
         if not stream:
-            yield from r.content
+            yield from r.fetch_content()
 
         return r
 
