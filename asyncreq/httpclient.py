@@ -6,7 +6,8 @@ from urllib3.connection import HTTPConnection as _HTTPConnection
 from http.client import (HTTPResponse as _HTTPResponse,
         _MAXHEADERS, _MAXLINE, LineTooLong, BadStatusLine, HTTPMessage,
         HTTPException, IncompleteRead, MAXAMOUNT, _CS_IDLE, _CS_REQ_SENT,
-        _UNKNOWN, ResponseNotReady, CONTINUE, NO_CONTENT, NOT_MODIFIED)
+        _UNKNOWN, ResponseNotReady, CONTINUE, NO_CONTENT, NOT_MODIFIED,
+        NotConnected)
 
 class MockSock:
 

@@ -1,6 +1,7 @@
 import asyncio
+import socket
 
-from requests.adapters import HTTPAdapter as _HTTPAdapter
+from requests.adapters import HTTPAdapter as _HTTPAdapter, DEFAULT_POOLBLOCK
 from requests.packages.urllib3.util import Timeout as TimeoutSauce
 from requests.exceptions import ConnectionError, Timeout, SSLError, ProxyError
 from requests.cookies import extract_cookies_to_jar

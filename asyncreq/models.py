@@ -1,6 +1,6 @@
 import asyncio
 
-from requests.models import Response as _Response
+from requests.models import Response as _Response, ITER_CHUNK_SIZE
 from requests.utils import iter_slices
 
 class Response(_Response):

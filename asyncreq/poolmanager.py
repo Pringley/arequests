@@ -1,8 +1,8 @@
 import asyncio
 
-from urllib3.poolmanager import PoolManager as _PoolManager
-from urllib3.connectionpool import port_by_scheme
-from urllib3.util import parse_url
+from requests.packages.urllib3.poolmanager import PoolManager as _PoolManager, SSL_KEYWORDS
+from requests.packages.urllib3.connectionpool import port_by_scheme
+from requests.packages.urllib3.util import parse_url
 
 from .connectionpool import HTTPConnectionPool
 

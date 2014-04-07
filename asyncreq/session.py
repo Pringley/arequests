@@ -1,10 +1,13 @@
 import asyncio
+import os
 
-from requests.sessions import Session as _Session
-from requests.compat import OrderedDict
+from datetime import datetime
+from requests.sessions import Session as _Session, merge_setting
+from requests.compat import OrderedDict, builtin_str
 from requests.cookies import extract_cookies_to_jar
 from requests.exceptions import TooManyRedirects
-
+from requests.models import Request, PreparedRequest
+from requests.utils import get_environ_proxies
 from .adapter import HTTPAdapter
 
 class Session(_Session):

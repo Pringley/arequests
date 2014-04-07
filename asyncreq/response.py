@@ -1,7 +1,7 @@
 import asyncio
 import zlib
 
-from urllib3.response import HTTPResponse as _HTTPResponse
+from requests.packages.urllib3.response import HTTPResponse as _HTTPResponse
 
 class HTTPResponse(_HTTPResponse):
     
