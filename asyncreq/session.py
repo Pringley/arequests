@@ -188,3 +188,71 @@ class Session(_Session):
             responses.append(resp)
 
         return responses
+
+    @asyncio.coroutine
+    def request(self, method, url,
+        params=None,
+        data=None,
+        headers=None,
+        cookies=None,
+        files=None,
+        auth=None,
+        timeout=None,
+        allow_redirects=True,
+        proxies=None,
+        hooks=None,
+        stream=None,
+        verify=None,
+        cert=None):
+
+        method = builtin_str(method)
+
+        # Create the Request.
+        req = Request(
+            method = method.upper(),
+            url = url,
+            headers = headers,
+            files = files,
+            data = data or {},
+            params = params or {},
+            auth = auth,
+            cookies = cookies,
+            hooks = hooks,
+        )
+        prep = self.prepare_request(req)
+
+        proxies = proxies or {}
+
+        # Gather clues from the surrounding environment.
+        if self.trust_env:
+            # Set environment's proxies.
+            env_proxies = get_environ_proxies(url) or {}
+            for (k, v) in env_proxies.items():
+                proxies.setdefault(k, v)
+
+            # Look for configuration.
+            if not verify and verify is not False:
+                verify = os.environ.get('REQUESTS_CA_BUNDLE')
+
+            # Curl compatibility.
+            if not verify and verify is not False:
+                verify = os.environ.get('CURL_CA_BUNDLE')
+
+        # Merge all the kwargs.
+        proxies = merge_setting(proxies, self.proxies)
+        stream = merge_setting(stream, self.stream)
+        verify = merge_setting(verify, self.verify)
+        cert = merge_setting(cert, self.cert)
+
+        # Send the request.
+        send_kwargs = {
+            'stream': stream,
+            'timeout': timeout,
+            'verify': verify,
+            'cert': cert,
+            'proxies': proxies,
+            'allow_redirects': allow_redirects,
+        }
+        resp = yield from self.send(prep, **send_kwargs)
+
+        return resp
