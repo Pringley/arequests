@@ -13,7 +13,7 @@ from .poolmanager import PoolManager
 from .response import HTTPResponse
 from .models import Response
 
-def HTTPAdapter(_HTTPAdapter):
+class HTTPAdapter(_HTTPAdapter):
 
     def init_poolmanager(self, connections, maxsize, block=DEFAULT_POOLBLOCK):
         """Initializes a urllib3 PoolManager. This method should not be called
