@@ -17,7 +17,7 @@ class Session(_Session):
 
         # reset adapters
         self.adapters = OrderedDict()
-        self.mount('http://', HTTPAdapter)
+        self.mount('http://', HTTPAdapter())
         # TODO: https
 
     @asyncio.coroutine
