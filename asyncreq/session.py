@@ -89,7 +89,7 @@ class Session(_Session):
         return r
 
 
-    @asyncio.coroutine()
+    @asyncio.coroutine
     def resolve_redirects(self, resp, req, stream=False, timeout=None,
                           verify=True, cert=None, proxies=None):
         """Receives a Response. Returns a list of Responses."""
