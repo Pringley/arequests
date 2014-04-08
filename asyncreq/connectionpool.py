@@ -2,13 +2,15 @@ import asyncio
 
 from queue import Empty
 from socket import error as SocketError, timeout as SocketTimeout
-from requests.packages.urllib3.connectionpool import HTTPConnectionPool as _HTTPConncectionPool, _Default
+from requests.packages.urllib3.connectionpool import (HTTPConnectionPool as
+        _HTTPConncectionPool, _Default, log)
 from requests.packages.urllib3.exceptions import (ReadTimeoutError, HostChangedError,
         EmptyPoolError, TimeoutError, MaxRetryError)
 from requests.packages.urllib3.connection import HTTPException, BaseSSLError
 from requests.packages.urllib3.packages.ssl_match_hostname import CertificateError
-from requests.packages.urllib3.util import get_host
+from requests.packages.urllib3.util import get_host, Timeout
 from .httpclient import HTTPConnection
+from .response import HTTPResponse
 
 class HTTPConnectionPool(_HTTPConncectionPool):
     ConnectionCls = HTTPConnection

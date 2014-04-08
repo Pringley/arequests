@@ -1,7 +1,8 @@
 import asyncio
 import zlib
 
-from requests.packages.urllib3.response import HTTPResponse as _HTTPResponse
+from requests.packages.urllib3.response import (HTTPResponse as _HTTPResponse,
+        _get_decoder)
 
 class HTTPResponse(_HTTPResponse):
     
