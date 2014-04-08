@@ -98,7 +98,7 @@ class Session(_Session):
 
         responses = []
 
-        while resp.is_redirect:
+        while ('location' in resp.headers and resp.status_code in REDIRECT_STATI):
             prepared_request = req.copy()
 
             yield from resp.content  # Consume socket so it can be released
