@@ -443,6 +443,14 @@ class HTTPConnection(_HTTPConnection):
             self.__response = None
         self.__state = _CS_IDLE
 
+    @asyncio.coroutine
+    def request(self, *args, **kwargs):
+
+        if self.async_writer is None:
+            yield from self.connect()
+
+        super().request(*args, **kwargs)
+
     def send(self, data):
 
         if self.async_writer is None:
