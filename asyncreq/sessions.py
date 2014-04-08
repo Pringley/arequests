@@ -165,10 +165,6 @@ class Session(_Session):
             prepared_request._cookies.update(self.cookies)
             prepared_request.prepare_cookies(prepared_request._cookies)
 
-            # Rebuild auth and proxy information.
-            proxies = self.rebuild_proxies(prepared_request, proxies)
-            self.rebuild_auth(prepared_request, resp)
-
             # Override the original request.
             req = prepared_request
 
