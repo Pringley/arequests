@@ -46,6 +46,8 @@ class AIOHTTPAdapter(requests.adapters.BaseAdapter):
             read_task = asyncio.Task(aiohttp_response.read_and_close())
             response._content = bytes(corolet.yield_from(read_task))
             response._content_consumed = True
+        else:
+            raise NotImplementedError("streaming requests not yet supported")
 
         return response
 
