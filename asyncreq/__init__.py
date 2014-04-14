@@ -1,7 +1,7 @@
 import requests
 import corolet
 
-from .greenadapter import AIOHTTPAdapter
+from .adapter import AIOHTTPAdapter
 
 @corolet.corolet
 def request(*args, **kwargs):
