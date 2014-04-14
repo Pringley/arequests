@@ -9,7 +9,6 @@ import requests.structures
 class AIOHTTPAdapter(requests.adapters.BaseAdapter):
 
     def send(self, request, stream=False, timeout=None, **kwargs):
-        chunked = not (request.body is None or 'Content-Length' in request.headers)
 
         aiohttp_request = asyncio.Task(aiohttp.request(
             request.method,
@@ -17,7 +16,7 @@ class AIOHTTPAdapter(requests.adapters.BaseAdapter):
             headers=request.headers.items(),
             data=request.body,
             allow_redirects=False,
-            chunked=chunked,
+            chunked=False,
             timeout=timeout,
             conn_timeout=timeout))
 
