@@ -1,9 +1,9 @@
-import greenio
 import requests
+import corolet
 
 from .greenadapter import AIOHTTPAdapter
 
-@greenio.task
+@corolet.corolet
 def request(*args, **kwargs):
     session = requests.Session()
     session.mount('https://', AIOHTTPAdapter())

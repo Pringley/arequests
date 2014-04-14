@@ -1,8 +1,7 @@
 import asyncio
 
 import aiohttp
-import greenio
-import greenio.socket
+import corolet
 import requests
 import requests.adapters
 import requests.structures
@@ -22,7 +21,7 @@ class AIOHTTPAdapter(requests.adapters.BaseAdapter):
             timeout=timeout,
             conn_timeout=timeout))
 
-        aiohttp_response = greenio.yield_from(aiohttp_request)
+        aiohttp_response = corolet.yield_from(aiohttp_request)
 
         response = requests.models.Response()
         response.status_code = getattr(aiohttp_response, 'status', None)
@@ -46,7 +45,7 @@ class AIOHTTPAdapter(requests.adapters.BaseAdapter):
 
         if not stream:
             read_task = asyncio.Task(aiohttp_response.read_and_close())
-            response._content = bytes(greenio.yield_from(read_task))
+            response._content = bytes(corolet.yield_from(read_task))
             response._content_consumed = True
 
         return response
